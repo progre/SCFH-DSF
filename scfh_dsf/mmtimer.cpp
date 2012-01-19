@@ -11,6 +11,7 @@
 
 #include "mmtimer.h"
 #include "tools.h"
+#include "qpce.h"
 
 static struct sMMTimerGlobal
 {
@@ -46,8 +47,8 @@ unsigned int CMicroTimer::run()
 	else
 #endif
 	{
-		QueryPerformanceFrequency((LARGE_INTEGER*)&freq);
-		QueryPerformanceCounter((LARGE_INTEGER*)&_org);
+		QueryPerformanceFrequencyEmulation((LARGE_INTEGER*)&freq);
+		QueryPerformanceCounterEmulation((LARGE_INTEGER*)&_org);
 	}
 	
     while(!terminated())
@@ -60,7 +61,7 @@ unsigned int CMicroTimer::run()
 		else
 #endif
 		{
-			QueryPerformanceCounter((LARGE_INTEGER*)&crr);
+			QueryPerformanceCounterEmulation((LARGE_INTEGER*)&crr);
 		}
 
 		if(orgTime)
@@ -105,7 +106,7 @@ unsigned int CMicroTimer::run()
 		{
 			for(;;)
 			{
-				QueryPerformanceCounter((LARGE_INTEGER*)&crr);
+				QueryPerformanceCounterEmulation((LARGE_INTEGER*)&crr);
 				if(crr >= obj || terminated())
 					break;
 			}
@@ -191,7 +192,7 @@ void CMicroTimer::calcError()
 
 	for(i=0; i<loop; i++)
 	{
-		QueryPerformanceCounter((LARGE_INTEGER*)&start);
+		QueryPerformanceCounterEmulation((LARGE_INTEGER*)&start);
 #ifdef USE_WT
 		t.QuadPart = -10000 * interval;
 		SetWaitableTimer(hWTimer, &t, 0, NULL, NULL, FALSE);
@@ -199,7 +200,7 @@ void CMicroTimer::calcError()
 #else
 		Sleep(interval);
 #endif
-		QueryPerformanceCounter((LARGE_INTEGER*)&end);
+		QueryPerformanceCounterEmulation((LARGE_INTEGER*)&end);
 
 		ave += pc2time(end-start)*1000.0 - (double)interval;
 	}

@@ -18,6 +18,7 @@
 #include "reg.h"
 #include "event.h"
 #include "mmtimer.h"
+#include "qpce.h"
 
 const SIZE sizeVideo[20] = {
 	{320, 240},	// 4:3
@@ -299,7 +300,7 @@ public:
 		LARGE_INTEGER tCurr;
 		REFERENCE_TIME rtRet;
 
-		QueryPerformanceCounter(&tCurr);
+		QueryPerformanceCounterEmulation(&tCurr);
 
 		if(pc2time(tCurr.QuadPart-tBase.QuadPart) > 60.0)
 		{
@@ -578,7 +579,7 @@ HRESULT CPushPin::DoBufferProcessingLoop(void)
 				continue;
 			}
 
-			QueryPerformanceCounter(&tstart);
+			QueryPerformanceCounterEmulation(&tstart);
 
 			hr = FillBuffer(pSample);
 
@@ -596,7 +597,7 @@ HRESULT CPushPin::DoBufferProcessingLoop(void)
 					blendSample(bufa, lena, bufb, lenb);
 			}
 
-			QueryPerformanceCounter(&tend);
+			QueryPerformanceCounterEmulation(&tend);
 			processTime += pc2time(tend.QuadPart-tstart.QuadPart);
 
 			pSample->SetTime(&rtA, &rtB);
@@ -629,7 +630,7 @@ HRESULT CPushPin::DoBufferProcessingLoop(void)
 
 			if(overSampling && ObjectiveSleep(frc, rtMyStart, rtB - rtFrameLength/2))
 			{
-				QueryPerformanceCounter(&tstart);
+				QueryPerformanceCounterEmulation(&tstart);
 
 				hr = FillBuffer(pBefSample);
 				if(SUCCEEDED(hr))
@@ -637,7 +638,7 @@ HRESULT CPushPin::DoBufferProcessingLoop(void)
 				else
 					enableBefSample = false;
 
-				QueryPerformanceCounter(&tend);
+				QueryPerformanceCounterEmulation(&tend);
 				processTime += pc2time(tend.QuadPart-tstart.QuadPart);
 			}
 			else

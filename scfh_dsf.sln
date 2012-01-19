@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "scfh_dsf", "scfh_dsf\scfh_dsf.vcproj", "{91C8C5E2-F195-45F6-BC4F-60147F7AECED}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "scfh_dsf", "scfh_dsf\scfh_dsf.vcxproj", "{91C8C5E2-F195-45F6-BC4F-60147F7AECED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

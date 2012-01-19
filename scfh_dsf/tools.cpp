@@ -9,6 +9,7 @@
 #include <math.h>
 
 #include "tools.h"
+#include "qpce.h"
 
 #define BUFLEN 512
 
@@ -37,7 +38,7 @@ double pc2time(__int64 t)
 	static __int64 freq = 1;
 
 	if(freq == 1)
-		QueryPerformanceFrequency((LARGE_INTEGER*)&freq);
+		QueryPerformanceFrequencyEmulation((LARGE_INTEGER*)&freq);
 
 	if(freq > 0)
 		return ((double)t / (double)freq);
