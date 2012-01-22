@@ -61,7 +61,7 @@ private:
 		workHeight = 0;
 	}
 
-	~CResizeDD()
+	virtual ~CResizeDD()
 	{
 		clear();
 	}

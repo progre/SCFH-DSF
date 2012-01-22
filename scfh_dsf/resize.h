@@ -76,7 +76,7 @@ public:
 	CEvent eventStart, eventEnd;
 
 	CResizeThread();
-	~CResizeThread();
+	virtual ~CResizeThread();
 
 	void resize();
 	unsigned int run();
