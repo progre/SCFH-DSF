@@ -715,6 +715,28 @@ HRESULT CPushPin::FillBuffer(IMediaSample *pSample)
 
 		if(info.active)
 		{
+			if (info.threadNum == 1)
+			{
+				if (info.resizeMode == RESIZE_MODE_SW_NEAREST)
+				{
+					info.resizeMode = RESIZE_MODE_DD_1PASS;
+				}
+				else
+				{
+					info.resizeMode = RESIZE_MODE_DD_2PASS;
+				}
+			}
+			else
+			{
+				if (info.resizeMode == RESIZE_MODE_DD_1PASS)
+				{
+					info.resizeMode = RESIZE_MODE_SW_NEAREST;
+				}
+				else if (info.resizeMode == RESIZE_MODE_DD_2PASS)
+				{
+					info.resizeMode = RESIZE_MODE_SW_BILINEAR;
+				}
+			}
 			switch(info.resizeMode)
 			{
 			case RESIZE_MODE_DD_1PASS:

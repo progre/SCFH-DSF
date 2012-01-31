@@ -23,7 +23,7 @@ HRESULT RecreateSurface(LPDIRECTDRAW lpDD, LPDIRECTDRAWSURFACE *lplpDDS, int wid
 	memset(&ddsd, 0, sizeof(DDSURFACEDESC));
 	ddsd.dwSize = sizeof(DDSURFACEDESC);
 	ddsd.dwFlags = DDSD_CAPS | DDSD_HEIGHT | DDSD_WIDTH;
-	ddsd.ddsCaps.dwCaps = DDSCAPS_OFFSCREENPLAIN | DDSCAPS_VIDEOMEMORY; // | DDSCAPS_LOCALVIDMEM;
+	ddsd.ddsCaps.dwCaps = DDSCAPS_OFFSCREENPLAIN | DDSCAPS_SYSTEMMEMORY;
 	ddsd.dwWidth = width;
 	ddsd.dwHeight = height;
 
